@@ -1,13 +1,12 @@
 import { json } from "@remix-run/node";
 import { Form, Link, Outlet } from "@remix-run/react";
 
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 import { getData } from "../models/airtable.server";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }) => {
-  const userId = await requireUserId(request);
-  
+//   const userId = await requireUserId(request);
   await getData({
     pageName: 'AllStudentRecords',
     pageBase: "appRCE5sPrn56fpvC",
