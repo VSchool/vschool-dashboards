@@ -7,6 +7,7 @@ import { useUser } from "~/utils";
 
 export const loader = async ({ request }) => {
   const userId = await requireUserId(request);
+  
   await getData({
     pageName: 'AllStudentRecords',
     pageBase: "appRCE5sPrn56fpvC",
