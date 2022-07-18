@@ -2,8 +2,8 @@ import axios from 'axios';
 import Airtable from 'airtable';
 import 'dotenv/config'
 
-
 export async function getData({pageName, pageBase, pageTable, pageFormula, pageFields}, retrieve) {
+    let localStorage
     axios.defaults.headers['Authorization'] = `Bearer ${process.env.AIRTABLE_API_KEY}`;
     if (typeof localStorage === "undefined" || localStorage === null) {
         var LocalStorage = require('node-localstorage').LocalStorage;
@@ -20,11 +20,7 @@ export async function getData({pageName, pageBase, pageTable, pageFormula, pageF
         } catch (e) {
             console.log(e, `Quota exceeded on ${pageName}!`);
         }
-    }else {
+    } else {
         console.log(`already got ${pageName} baby`)
     }
 }
-
-
-
-
