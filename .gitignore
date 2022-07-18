@@ -11,3 +11,5 @@ node_modules
 /prisma/seed.js
 
 /app/styles/tailwind.css
+
+.DS_Store
