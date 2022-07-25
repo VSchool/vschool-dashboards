@@ -1,12 +1,24 @@
-import { Link, Outlet } from "@remix-run/react";
+import { Link, Outlet, useLocation } from "@remix-run/react";
 
 export default function EducationPage() {
-    
+    const { pathname } = useLocation();
+    let path = pathname.slice(pathname.indexOf('/',7) + 1)
+
     return (
       <main>
         <div className="flex">
-            <Link className="block p-4 text-xl text-blue-500" to="overview">Overview</Link>
-            <Link className="block p-4 text-xl text-blue-500" to="student-progress">Student Progress</Link>
+            <Link 
+                id={path.includes('overview')  ? "active-link" : "false"}
+                className="link p-4 mx-2"
+                to="overview">
+                    Overview 
+            </Link>
+            <Link 
+                id={path.includes('student-progress') ? "active-link" : "false"}
+                className="link p-4 mx-2"
+                to="student-progress" >
+                    Student Progress
+            </Link>
         </div>
 
         <div className="flex-1 p-6">

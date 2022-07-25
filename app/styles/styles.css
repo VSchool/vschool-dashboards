@@ -1,0 +1,20 @@
+@import url("https://use.typekit.net/rfo4ebp.css");
+
+:root {
+    --blue-base: #456AE2;
+    --white: #ffffff;
+}
+
+.link {
+    font-family: 'aktiv-grotesk-extended';
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: var(--blue-base);
+}
+
+#active-link {
+    border-bottom: 2px solid var(--blue-base);
+}
