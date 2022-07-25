@@ -47,6 +47,7 @@
     "react-use-idb": "^1.0.2",
     "redis": "^4.1.0",
     "redis-server": "^1.2.2",
+    "styled-components": "^5.3.5",
     "tiny-invariant": "^1.2.0"
   },
   "devDependencies": {
@@ -86,5 +87,8 @@
   },
   "prisma": {
     "seed": "node --require tsconfig-paths/register prisma/seed.js"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
