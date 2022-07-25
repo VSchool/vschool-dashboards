@@ -1,8 +1,8 @@
 import { useLoaderData } from "@remix-run/react";
-import { useEffect } from "react";
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
 export const loader = async () => {
+	let localStorage
     if (typeof localStorage === "undefined" || localStorage === null) {
       var LocalStorage = require('node-localstorage').LocalStorage;
       localStorage = new LocalStorage('./scratch');
