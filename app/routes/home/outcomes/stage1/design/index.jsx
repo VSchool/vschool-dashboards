@@ -31,10 +31,10 @@ export default function AllStage1Page() {
 	}
 
     //////// GET MEDIAN COMPLETION /////////
-    const medianComp = filteredProgress.filter(fields => fields['Level Number'] == 8 && fields['Status'] === 'Completed' && fields['Actual End Date'] && !isNaN(fields['Course Completed in Days']) && fields['Course Completed in Days'] > 0 && fields['Course Subject'][0] === 'XD')
+    const medianComp = filteredProgress.filter(fields => fields['Level Number'] == 8 && fields['Status'] === 'Completed' && fields['Actual End Date'] && !isNaN(fields['Course Completed in Days']) && fields['Course Completed in Days'] > 0 && (fields['Course Subject'] && fields['Course Subject'][0] === 'XD'))
 
     //////// GET MEDIAN DAYS //////////
-    const medianDays = filteredProgress.filter(fields => fields['Level Number'] > 0 && fields['Level Number'] < 7 && !isNaN(fields['Days in Level']) && fields['Days in Level'] > 0 && fields['Course Subject'][0] === 'XD')
+    const medianDays = filteredProgress.filter(fields => fields['Level Number'] > 0 && fields['Level Number'] < 7 && !isNaN(fields['Days in Level']) && fields['Days in Level'] > 0 && (fields['Course Subject'] && fields['Course Subject'][0] === 'XD'))
 
     function getMedian(data, metric){
         const days = data.map(fields => fields[metric])

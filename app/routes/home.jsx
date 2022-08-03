@@ -1,12 +1,16 @@
-import { json } from "@remix-run/node";
-import { Form, Link, Outlet } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
 
 // import { requireUserId } from "~/session.server";
 import { getData } from "../models/airtable.server";
 import { useUser } from "~/utils";
 
 export const loader = async ({ request }) => {
-  	// const userId = await requireUserId(request);
+    let localStorage
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
 
     async function refreshData (){
         await getData({
@@ -71,11 +75,43 @@ export const loader = async ({ request }) => {
     setInterval(() => {
         refreshData()
     }, 60000)
-	return json({});
+
+	return {
+        campaign: JSON.parse(localStorage.getItem('AllCampaignData')),
+        scholarship: JSON.parse(localStorage.getItem('AllScholarshipData')),
+        records: JSON.parse(localStorage.getItem('AllStudentRecords')),
+        progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
+    };
 };
 
 export default function HomePage() {
-  	const user = useUser();
+    const user = useUser();
+    const [ initialData, setInitialData ] = useState(true)
+    const { campaign, scholarship, records, progress } = useLoaderData()
+    
+    function loadLocalStorage (){
+        const duplicates = [];
+        const campNoDupes = [];
+        campaign.forEach((item) => {
+        const found = scholarship.find(field => item['Contact Name'] && item['Contact Name'][0] == field['Name']);
+        found ? duplicates.push({ ...item,...found }) : campNoDupes.push(item)
+        })
+        const scholNoDupes = scholarship.filter((item) => !duplicates.find(field => item['Name'] == field['Name']))
+        localStorage.setItem('AllGrowthRecords', JSON.stringify([...duplicates, ...scholNoDupes, ...campNoDupes]))
+        localStorage.setItem('stage1', JSON.stringify(records.filter(fields => fields['Current Level'] > 0 && fields['Current Level'] < 7)))
+        localStorage.setItem('stage2', JSON.stringify(progress.filter(fields => fields['Level Number'] === 7  && (fields['Status'] === 'In progress' || fields['Status'] === 'Pending (Needs S2 project)')).filter((v,i,a)=>a.findIndex(v2=>(v2['Student Record'][0] === v['Student Record'][0]))===i)))
+        localStorage.setItem('stage3', JSON.stringify(progress.filter(fields => fields['Level Number'] === 8  && fields['Status'] === 'Completed').filter((v,i,a)=>a.findIndex(v2=>(v2['Student Record'][0] === v['Student Record'][0]))===i)))
+        localStorage.setItem('development', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "FSJS")))
+        localStorage.setItem('design', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "XD")))
+        localStorage.setItem('security', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "Security")))
+        localStorage.setItem('blockchain', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "Blockchain")))
+        setInitialData(false)
+    }
+
+    useEffect(()=> {
+        loadLocalStorage()
+    },[])
+
 	return (
 		<div className="flex h-full min-h-screen flex-col">
 		<header className="flex items-center justify-between bg-slate-800 p-4 text-white">
@@ -91,6 +127,12 @@ export default function HomePage() {
 				Logout
 			</button>
 			</Form>
+            {initialData && <button
+				onClick={loadLocalStorage}
+				className="rounded bg-slate-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
+			>
+				Refresh Data
+			</button>}
 		</header>
 
 		<main className="flex h-full bg-white">
