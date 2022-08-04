@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { useState, useEffect } from 'react';
+import SetTimeFrame from '../../../components/set-time-frame';
 
 export const loader = async () => {
     let localStorage;
@@ -70,14 +71,7 @@ export default function AllStage1Page() {
     return (
         <main>
         <h1>All Stage 1 Design Records</h1>
-        <div className="flex">
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame('all')}>All</button>
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame('week')}>Week</button>
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame(1)}>1 Month</button>
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame(3)}>3 Month</button>
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame(6)}>6 Month</button>
-			<button className="text-blue-600 p-4" onClick={() => setTimeFrame(12)}>Year</button>
-		</div>
+        <SetTimeFrame setTimeFrame={setTimeFrame} />
         <br />
         <hr />
         <br />

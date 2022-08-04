@@ -2,25 +2,15 @@ import { useLoaderData } from "@remix-run/react";
 import { useState } from 'react';
 import SetTimeFrame from "../../../components/set-time-frame";
 
-export const loader = async () => {
-    let localStorage
-    if (typeof localStorage === "undefined" || localStorage === null) {
-      var LocalStorage = require('node-localstorage').LocalStorage;
-      localStorage = new LocalStorage('./scratch');
-    }
-
-    return {
-      records: JSON.parse(localStorage.getItem('AllStudentRecords')),
-      progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
-    }
-  };
-
-export default function AllStudentProgressPage() {
+export default function AllStudentProgressPage({abbreviation, h1}) {
     const { records, progress } = useLoaderData();
 	const [ filteredRecords, setFilteredRecords ] = useState(records);
 	const [ filteredProgress, setFilteredProgress ] = useState(progress);
     const [ paused, setPaused ] = useState(records.filter(fields => fields["Simple Status"] === "Paused"))
 
+    if(!abbreviation) {
+        
+    }
 
     //////// GET MEDIAN COMPLETION /////////
     const medianComp = filteredProgress.filter(fields => fields['Level Number'] == 8 && fields['Status'] === 'Completed' && fields['Actual End Date'] && !isNaN(fields['Course Completed in Days']) && fields['Course Completed in Days'] > 0 )
@@ -61,7 +51,7 @@ export default function AllStudentProgressPage() {
     
     return (
         <main>
-            <h1>All Student Progress Records</h1>
+            <h1>{h1}</h1>
 			<SetTimeFrame setTimeFrame={setTimeFrame} />
 			<br />
 			<hr />
