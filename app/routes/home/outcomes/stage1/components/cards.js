@@ -2,21 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import { useState, useEffect } from 'react';
 import SetTimeFrame from '../../../components/set-time-frame';
 
-
-export const loader = async () => {
-    let localStorage
-    if (typeof localStorage === "undefined" || localStorage === null) {
-      var LocalStorage = require('node-localstorage').LocalStorage;
-      localStorage = new LocalStorage('./scratch');
-    }
-
-    return {
-      records: JSON.parse(localStorage.getItem('AllStudentRecords')),
-      progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
-    }
-  };
-
-export default function AllStage1Page() {
+export default function AllStage1Page(props) {
     const { records, progress } = useLoaderData();
     const [ filteredRecords, setFilteredRecords ] = useState([]);
     const [ filteredProgress, setFilteredProgress ] = useState([]);
@@ -71,7 +57,7 @@ export default function AllStage1Page() {
      
     return (
         <main>
-        <h1>All Stage 1 Records</h1>
+        <h1>{props.page}</h1>
         <SetTimeFrame setTimeFrame={setTimeFrame} />
 		<br />
 		<hr />
