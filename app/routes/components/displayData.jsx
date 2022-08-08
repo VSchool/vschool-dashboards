@@ -57,7 +57,7 @@ export default function DisplayData ({records, progress, page, title, dept, cour
         const courseStage1 = course ? getLocal('stage1').filter(fields => fields['Course Subject'] === course) : getLocal('stage1')
         const courseStage2 = course ? getLocal('stage2').filter(fields => fields["Course Subject"] && fields["Course Subject"][0] === course) : getLocal('stage2')
         const courseStage3 = course ? getLocal('stage3').filter(fields => fields["Course Subject"] && fields["Course Subject"][0] === course) : getLocal('stage3')
-
+        console.log()
         if (timeframe === 'all') {
 			setInitial()
 		}else {
