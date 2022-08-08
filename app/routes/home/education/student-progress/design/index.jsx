@@ -19,7 +19,7 @@ export default function DesignPage() {
     
     return (
         <main>
-		    <DisplayData records={records} progress={progress} title={'Design Student Progress Records'} dept={'education'} />
+		    <DisplayData records={records} progress={progress} title={'Design Student Progress Records'} dept={'education'} course={'XD'} />
         </main>
     );
 }

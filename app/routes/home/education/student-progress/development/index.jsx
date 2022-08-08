@@ -20,7 +20,7 @@ export default function DevelopmentPage() {
 
     return (
         <main>
-            <DisplayData records={records} progress={progress} title={'Development Student Progress Records'} dept={'education'} />
+            <DisplayData records={records} progress={progress} title={'Development Student Progress Records'} dept={'education'} course={'FSJS'} />
         </main>
     );
 }
