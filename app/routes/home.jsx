@@ -12,37 +12,6 @@ export const loader = async ({ request }) => {
       localStorage = new LocalStorage('./scratch');
     }
 
-    async function refreshData (){
-        await getData({
-            pageName: 'AllStudentRecords',
-            pageBase: "appRCE5sPrn56fpvC",
-            pageTable: "tblLI0BswFWDNUrq6",
-            pageFormula: "AND(NOT({Simple Status} = 'Not RLM'), NOT({Admissions Status} = ''))",
-            pageFields: ["Admissions Status", "Course Start Date", "Course Subject", "Current Level", "Last Interaction Date", "Simple Status", "Student Name", "Time to Start" ]
-        }, true)
-        await getData({
-            pageName: 'AllStudentProgress',
-            pageBase: "appRCE5sPrn56fpvC",
-            pageTable: "tblFhb879oExYkEzQ",
-            pageFormula: "",
-            pageFields: ['Actual End Date', 'Compensation Rate', 'Compensation Unit', 'Course Completed in Days', 'Course Subject', 'Created On','Days in Level', 'Level Number', 'Start Date', 'Status', 'Student Record', 'Type' ]
-        }, true)
-        await getData({
-            pageName: 'AllCampaignData',
-            pageBase: "appRCE5sPrn56fpvC",
-            pageTable: "tblLI0BswFWDNUrq6",
-            pageFormula: "NOT({Admissions Status} = '')",
-            pageFields: ["Admissions Status", "Campaign Medium", "Campaign Name", "Campaign Source", "Course Start Date", "Contact Name"]
-        }, true)
-        await getData({
-            pageName: 'AllScholarshipData',
-            pageBase: "appDtw82NJafLsLdO",
-            pageTable: "tblPXgXCQ2rj6d5e9",
-            pageFormula: "",
-            pageFields: ["Created", "Name", "Scholarship Name", "UTM Campaign", "UTM Content", "UTM Medium", "UTM Source"]
-        }, true)
-    }
-
 	await getData({
 		pageName: 'AllStudentRecords',
 		pageBase: "appRCE5sPrn56fpvC",
@@ -72,10 +41,6 @@ export const loader = async ({ request }) => {
 		pageFields: ["Created", "Name", "Scholarship Name", "UTM Campaign", "UTM Content", "UTM Medium", "UTM Source"]
 	})
 
-    setInterval(() => {
-        refreshData()
-    }, 60000)
-
 	return {
         campaign: JSON.parse(localStorage.getItem('AllCampaignData')),
         scholarship: JSON.parse(localStorage.getItem('AllScholarshipData')),
@@ -101,10 +66,6 @@ export default function HomePage() {
         localStorage.setItem('stage1', JSON.stringify(records.filter(fields => fields['Current Level'] > 0 && fields['Current Level'] < 7)))
         localStorage.setItem('stage2', JSON.stringify(progress.filter(fields => fields['Level Number'] === 7  && (fields['Status'] === 'In progress' || fields['Status'] === 'Pending (Needs S2 project)')).filter((v,i,a)=>a.findIndex(v2=>(v2['Student Record'][0] === v['Student Record'][0]))===i)))
         localStorage.setItem('stage3', JSON.stringify(progress.filter(fields => fields['Level Number'] === 8  && fields['Status'] === 'Completed').filter((v,i,a)=>a.findIndex(v2=>(v2['Student Record'][0] === v['Student Record'][0]))===i)))
-        localStorage.setItem('development', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "FSJS")))
-        localStorage.setItem('design', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "XD")))
-        localStorage.setItem('security', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "Security")))
-        localStorage.setItem('blockchain', JSON.stringify(records.filter(fields => fields["Simple Status"] === "In Progress" && fields["Course Subject"] === "Blockchain")))
         setInitialData(false)
     }
 
