@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export default function HomeIndex() {
   return (
-    <div>
+    <div className = "dashboard-container">
       DASHBOARDS HOME PAGE
     </div>
   );

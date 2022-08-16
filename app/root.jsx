@@ -10,13 +10,15 @@ import {
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import styles from './styles/styles.css';
+import font from "https://p.typekit.net/p.css?s=1&k=cjx1kwk&ht=tk&f=14032.14033.14034.14035.26893.26894.26897.26898.26909.26910.26913.26914.29382.29383&a=44359192&app=typekit&e=css";
 
 import { getUser } from "./session.server";
 
 export const links = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: styles }
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: "https://use.typekit.net/cjx1kwk.css"}
 ];
 };
 

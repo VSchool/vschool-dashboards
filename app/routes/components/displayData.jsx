@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Timeframe from '../components/timeframe';
+import Channels from './channels/channels';
 
 
 export default function DisplayData ({records, progress, page, title, dept, course}) {
@@ -88,7 +89,7 @@ export default function DisplayData ({records, progress, page, title, dept, cour
 
     return (
         <>
-            <h1>{title}</h1>
+            {/* <h1>{title}</h1> */}
             <Timeframe timeframe={setTimeFrame} />
             <br />
             <hr />
@@ -118,9 +119,27 @@ export default function DisplayData ({records, progress, page, title, dept, cour
 
                 {dept === 'growth' && 
                     <>
-                        <p>Applications: {growthRecords.length}</p>
+                        <div className = "card-container">
+                            <div className = "card-wrapper">
+                                <h3 className = "card-title">Total Applications </h3>
+                                <h3 className = "card-nums">{growthRecords.length}</h3>
+                                <p className = "card-compared-stat">+ 5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>Compared to last month</span></p>
+                            </div>
+                            <div className = "card-wrapper">
+                                <h3 className = "card-title">Total Enrollments </h3>
+                                <h3 className = "card-nums">{growthRecords.filter(fields => fields["Admissions Status"] === "Started").length}</h3>
+                                <p className = "card-compared-stat">+5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>Compared to last month</span></p>
+                            </div>
+                            <div className = "card-wrapper">
+                                <h3 className = "card-title">Conversion Rate</h3>
+                                <h3 className = "card-nums"> {((growthRecords.filter(fields => fields["Admissions Status"] === "Started").length / growthRecords.length) * 100).toFixed(2)}%</h3>
+                                <p className = "card-compared-stat">+5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>Compared to last month</span></p>
+                            </div>
+                            <Channels />
+                        </div>
+                        {/* <p>Applications: {growthRecords.length}</p>
                         <p>Enrollments: {growthRecords.filter(fields => fields["Admissions Status"] === "Started").length}</p>
-                        <p>Conversion Rate: {((growthRecords.filter(fields => fields["Admissions Status"] === "Started").length / growthRecords.length) * 100).toFixed(2)}%</p>
+                        <p>Conversion Rate: {((growthRecords.filter(fields => fields["Admissions Status"] === "Started").length / growthRecords.length) * 100).toFixed(2)}%</p> */}
                     </>
                 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import NavBar from "../routes/components/nav-bar/nav-bar"
 
 // import { requireUserId } from "~/session.server";
 import { getData } from "../models/airtable.server";
@@ -76,7 +77,7 @@ export default function HomePage() {
 	return (
 		<div className="flex h-full min-h-screen flex-col">
 		<header className="flex items-center justify-between bg-slate-800 p-4 text-white">
-			<h1 className="text-3xl font-bold">
+			<h1 className="text-3xl font-bold" style = {{marginLeft: "150px"}}>
 			<Link to=".">V School</Link>
 			</h1>
 			<p>{user.email}</p>
@@ -97,7 +98,8 @@ export default function HomePage() {
 		</header>
 
 		<main className="flex h-full bg-white">
-			<div className="h-full w-40 border-r bg-gray-50">
+			<NavBar />
+			{/* <div className="h-full w-40 border-r bg-gray-50">
 			<Link to="education/overview" className="block p-4 text-xl text-blue-500">
 				Education
 			</Link>
@@ -107,7 +109,7 @@ export default function HomePage() {
 			<Link to="growth/pipeline" className="block p-4 text-xl text-blue-500">
 				Growth
 			</Link>
-			</div>
+			</div> */}
 
 			<div className="flex-1 p-6">
 			<Outlet />
