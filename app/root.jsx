@@ -14,6 +14,8 @@ import font from "https://p.typekit.net/p.css?s=1&k=cjx1kwk&ht=tk&f=14032.14033.
 
 import { getUser } from "./session.server";
 
+import {DataContextProvider} from './routes/home/data-context';
+
 export const links = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
@@ -42,7 +44,9 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <DataContextProvider>
+          <Outlet />
+        </DataContextProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
