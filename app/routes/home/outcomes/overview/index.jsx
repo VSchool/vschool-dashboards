@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import DisplayData from "../../../components/displayData";
+import Timeframe from "../../../components/timeframe";
 
 export const loader = async () => {
 	let localStorage
@@ -16,8 +17,11 @@ export const loader = async () => {
 export default function OutcomesIndex (){
     const { records } = useLoaderData()
 
+    console.log(records)
+
     return (
         <div>
+           <Timeframe />
             <DisplayData records={records} title={'Outcomes Overview'} dept={"outcomes"} page={"overview"} />
         </div>
     )
