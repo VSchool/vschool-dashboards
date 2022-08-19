@@ -13,6 +13,7 @@ export default function Pipeline (){
     console.log(growthRecords)
     return (
         <div>
+        
             <DisplayData title={'Pipeline'} dept={'growth'} />
         </div>
     )

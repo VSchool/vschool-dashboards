@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, Link } from "@remix-run/react";
 import DisplayData from "../../../../components/displayData";
 
 export const loader = async () => {
@@ -18,7 +18,7 @@ export default function AllStage1Page() {
     const { records, progress } = useLoaderData();
  
     return (
-        <main>
+        <main>      
             <DisplayData records={records} progress={progress} dept={'outcomes'} page={'stage1'} title={'All Stage 1 Records'} />
         </main>
     );

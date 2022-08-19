@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import DisplayData from "../../../components/displayData";
+import users from "public/users_noBorder.png"
 
 export const loader = async () => {
     let localStorage
@@ -18,7 +19,10 @@ export default function EducationIndex() {
     
     return (
         <main>
-              <DisplayData page={'overview'} records={records} title={'Overview Records'} dept={'education'} />
+          
+            <DisplayData page={'overview'} records={records} title={'Overview Records'} dept={'education'} />
+          
+              
         </main>
     );
 }

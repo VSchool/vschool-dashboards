@@ -1,4 +1,5 @@
 import { json } from "@remix-run/node";
+ 
 import {
   Links,
   LiveReload,
@@ -39,7 +40,10 @@ export const loader = async ({ request }) => {
 export default function App() {
   return (
     <html lang="en" className="h-full">
+      
       <head>
+        <title>VSchool Dashboard</title>
+        {/* <link rel="shortcut icon" href = "public/favicon.ico" type="image/x-icon"></link> */}
         <Meta />
         <Links />
       </head>
