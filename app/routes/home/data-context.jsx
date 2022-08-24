@@ -1,7 +1,50 @@
 import {useState, createContext} from 'react'
 import {useLoaderData} from '@remix-run/react'
-
+import {getData} from "../../models/airtable.server"
 const Context = createContext()
+
+export const loader = async ({ request }) => {
+    let localStorage
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
+    await getData({
+		pageName: 'AllStudentRecords',
+		pageBase: "appRCE5sPrn56fpvC",
+		pageTable: "tblLI0BswFWDNUrq6",
+		pageFormula: "AND(NOT({Simple Status} = 'Not RLM'), NOT({Admissions Status} = ''))",
+		pageFields: ["Admissions Status", "Course Start Date", "Course Subject", "Current Level", "Last Interaction Date", "Simple Status", "Student Name", "Time to Start" ]
+	})
+	await getData({
+		pageName: 'AllStudentProgress',
+		pageBase: "appRCE5sPrn56fpvC",
+		pageTable: "tblFhb879oExYkEzQ",
+		pageFormula: "",
+		pageFields: ['Actual End Date', 'Compensation Rate', 'Compensation Unit', 'Course Completed in Days', 'Course Subject', 'Created On','Days in Level', 'Level Number', 'Start Date', 'Status', 'Student Record', 'Type' ]
+	})
+	await getData({
+		pageName: 'AllCampaignData',
+		pageBase: "appRCE5sPrn56fpvC",
+		pageTable: "tblLI0BswFWDNUrq6",
+		pageFormula: "NOT({Admissions Status} = '')",
+		pageFields: ["Admissions Status", "Campaign Medium", "Campaign Name", "Campaign Source", "Course Start Date", "Contact Name"]
+	})
+	await getData({
+		pageName: 'AllScholarshipData',
+		pageBase: "appDtw82NJafLsLdO",
+		pageTable: "tblPXgXCQ2rj6d5e9",
+		pageFormula: "",
+		pageFields: ["Created", "Name", "Scholarship Name", "UTM Campaign", "UTM Content", "UTM Medium", "UTM Source"]
+	})
+    return {
+        campaign: JSON.parse(localStorage.getItem('AllCampaignData')),
+        scholarship: JSON.parse(localStorage.getItem('AllScholarshipData')),
+        records: JSON.parse(localStorage.getItem('AllStudentRecords')),
+        progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
+    };
+};
+
 
 function DataContextProvider(props) {
     const [ filteredRecords, setFilteredRecords ] = useState([]);
@@ -11,7 +54,8 @@ function DataContextProvider(props) {
 	const [ filteredStage3, setFilteredStage3 ] = useState([]);
     const [ growthRecords, setGrowthRecords ] = useState([])
     
-    let { records, progress } = useLoaderData();
+    let { campaign, scholarship, records, progress } = useLoaderData()
+
 
     if(!records) {
         records = []
@@ -56,7 +100,7 @@ function DataContextProvider(props) {
         const courseStage2 = course ? getLocal('stage2').filter(fields => fields["Course Subject"] && fields["Course Subject"][0] === course) : getLocal('stage2')
         const courseStage3 = course ? getLocal('stage3').filter(fields => fields["Course Subject"] && fields["Course Subject"][0] === course) : getLocal('stage3')
         if (timeframe === 'all') {
-            console.log(course)
+         
             //if else block for course, calling setInitialEducation, setInitialGrowth, or setInitialOutcomes
 			//setInitial()
 		}else {
@@ -83,6 +127,9 @@ function DataContextProvider(props) {
 			return d > f
 		}))
 	}
+
+    
+
     return (
         <Context.Provider value={{
             filteredRecords, 

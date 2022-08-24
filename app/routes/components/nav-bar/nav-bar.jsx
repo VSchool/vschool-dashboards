@@ -27,7 +27,7 @@ export default function NavBar() {
 
     console.log(activeIcon)
 
-    console.log(path)
+
 
     return (
         <>

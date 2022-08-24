@@ -9,12 +9,16 @@ export async function getData({pageName, pageBase, pageTable, pageFormula, pageF
         var LocalStorage = require('node-localstorage').LocalStorage;
         localStorage = new LocalStorage('./scratch');
     }
+    // if (pageName === "AllStudentRecords") {
+    //     console.log(localStorage.getItem(pageName))
+    // }
     if(localStorage.getItem(pageName) == undefined || retrieve){
         var base = Airtable.base(pageBase);
         var table = base.table(pageTable);
         const data = await table.select({ filterByFormula: pageFormula, fields: pageFields}).all()
         const fieldData = data.map(({fields}) => fields)
         try {
+            // console.log(localStorage.getItem("AllStudentRecords"))
             localStorage.removeItem(pageName)
             localStorage.setItem(pageName, JSON.stringify(fieldData));
         } catch (e) {
