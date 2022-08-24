@@ -20,7 +20,30 @@ export default function Channels(){
                     <select className = "filter-inputs">
                         <option>SORT BY</option>
                     </select>
+                        
                 </div>
+                <p className = "results">7 Results</p>
+                {/* table to list the channels */}
+
+                <form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Channel</th>
+                                <th>Department</th>
+                                <th>Applications</th>
+                                <th>Enrollments</th>
+                                <th>Conversion</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
 
             </div>
         </>

@@ -54,8 +54,11 @@ export default function HomePage() {
     const user = useUser();
     const [ initialData, setInitialData ] = useState(true)
     const { campaign, scholarship, records, progress } = useLoaderData()
+
+
     
     function loadLocalStorage (){
+		console.log("test")
         const duplicates = [];
         const campNoDupes = [];
         campaign.forEach((item) => {
@@ -72,7 +75,11 @@ export default function HomePage() {
 
     useEffect(()=> {
         loadLocalStorage()
+		
     },[])
+
+	
+
 
 	return (
 		<div className="flex h-full min-h-screen flex-col">

@@ -1,4 +1,5 @@
 import { json } from "@remix-run/node";
+ 
 import {
   Links,
   LiveReload,
@@ -13,6 +14,8 @@ import styles from './styles/styles.css';
 import font from "https://p.typekit.net/p.css?s=1&k=cjx1kwk&ht=tk&f=14032.14033.14034.14035.26893.26894.26897.26898.26909.26910.26913.26914.29382.29383&a=44359192&app=typekit&e=css";
 
 import { getUser } from "./session.server";
+
+import {DataContextProvider} from './routes/home/data-context';
 
 export const links = () => {
   return [
@@ -37,12 +40,17 @@ export const loader = async ({ request }) => {
 export default function App() {
   return (
     <html lang="en" className="h-full">
+      
       <head>
+        <title>VSchool Dashboard</title>
+        {/* <link rel="shortcut icon" href = "public/favicon.ico" type="image/x-icon"></link> */}
         <Meta />
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <DataContextProvider>
+          <Outlet />
+        </DataContextProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
