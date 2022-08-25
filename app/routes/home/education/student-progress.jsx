@@ -3,54 +3,54 @@ import searchBar from "public/search.png"
 import { getData } from "../../../models/airtable.server"
 
 
-export const loader = async ({ request }) => {
-    let localStorage
-    if (typeof localStorage === "undefined" || localStorage === null) {
-      var LocalStorage = require('node-localstorage').LocalStorage;
-      localStorage = new LocalStorage('./scratch');
-    }
+// export const loader = async ({ request }) => {
+//     let localStorage
+//     if (typeof localStorage === "undefined" || localStorage === null) {
+//       var LocalStorage = require('node-localstorage').LocalStorage;
+//       localStorage = new LocalStorage('./scratch');
+//     }
 
-	await getData({
-		pageName: 'AllStudentRecords',
-		pageBase: "appRCE5sPrn56fpvC",
-		pageTable: "tblLI0BswFWDNUrq6",
-		pageFormula: "AND(NOT({Simple Status} = 'Not RLM'), NOT({Admissions Status} = ''))",
-		pageFields: ["Admissions Status", "Course Start Date", "Course Subject", "Current Level", "Last Interaction Date", "Simple Status", "Student Name", "Time to Start" ]
-	})
-	await getData({
-		pageName: 'AllStudentProgress',
-		pageBase: "appRCE5sPrn56fpvC",
-		pageTable: "tblFhb879oExYkEzQ",
-		pageFormula: "",
-		pageFields: ['Actual End Date', 'Compensation Rate', 'Compensation Unit', 'Course Completed in Days', 'Course Subject', 'Created On','Days in Level', 'Level Number', 'Start Date', 'Status', 'Student Record', 'Type' ]
-	})
-	await getData({
-		pageName: 'AllCampaignData',
-		pageBase: "appRCE5sPrn56fpvC",
-		pageTable: "tblLI0BswFWDNUrq6",
-		pageFormula: "NOT({Admissions Status} = '')",
-		pageFields: ["Admissions Status", "Campaign Medium", "Campaign Name", "Campaign Source", "Course Start Date", "Contact Name"]
-	})
-	await getData({
-		pageName: 'AllScholarshipData',
-		pageBase: "appDtw82NJafLsLdO",
-		pageTable: "tblPXgXCQ2rj6d5e9",
-		pageFormula: "",
-		pageFields: ["Created", "Name", "Scholarship Name", "UTM Campaign", "UTM Content", "UTM Medium", "UTM Source"]
-	})
+// 	await getData({
+// 		pageName: 'AllStudentRecords',
+// 		pageBase: "appRCE5sPrn56fpvC",
+// 		pageTable: "tblLI0BswFWDNUrq6",
+// 		pageFormula: "AND(NOT({Simple Status} = 'Not RLM'), NOT({Admissions Status} = ''))",
+// 		pageFields: ["Admissions Status", "Course Start Date", "Course Subject", "Current Level", "Last Interaction Date", "Simple Status", "Student Name", "Time to Start" ]
+// 	})
+// 	await getData({
+// 		pageName: 'AllStudentProgress',
+// 		pageBase: "appRCE5sPrn56fpvC",
+// 		pageTable: "tblFhb879oExYkEzQ",
+// 		pageFormula: "",
+// 		pageFields: ['Actual End Date', 'Compensation Rate', 'Compensation Unit', 'Course Completed in Days', 'Course Subject', 'Created On','Days in Level', 'Level Number', 'Start Date', 'Status', 'Student Record', 'Type' ]
+// 	})
+// 	await getData({
+// 		pageName: 'AllCampaignData',
+// 		pageBase: "appRCE5sPrn56fpvC",
+// 		pageTable: "tblLI0BswFWDNUrq6",
+// 		pageFormula: "NOT({Admissions Status} = '')",
+// 		pageFields: ["Admissions Status", "Campaign Medium", "Campaign Name", "Campaign Source", "Course Start Date", "Contact Name"]
+// 	})
+// 	await getData({
+// 		pageName: 'AllScholarshipData',
+// 		pageBase: "appDtw82NJafLsLdO",
+// 		pageTable: "tblPXgXCQ2rj6d5e9",
+// 		pageFormula: "",
+// 		pageFields: ["Created", "Name", "Scholarship Name", "UTM Campaign", "UTM Content", "UTM Medium", "UTM Source"]
+// 	})
 
-	return {
-        campaign: JSON.parse(localStorage.getItem('AllCampaignData')),
-        scholarship: JSON.parse(localStorage.getItem('AllScholarshipData')),
-        records: JSON.parse(localStorage.getItem('AllStudentRecords')),
-        progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
-    };
-};
+// 	return {
+//         campaign: JSON.parse(localStorage.getItem('AllCampaignData')),
+//         scholarship: JSON.parse(localStorage.getItem('AllScholarshipData')),
+//         records: JSON.parse(localStorage.getItem('AllStudentRecords')),
+//         progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
+//     };
+// };
 
 
 export default function StudentProgressPage() {
 
-    let {campaign, records, scholarship, progress} = useLoaderData()
+    // let {campaign, records, scholarship, progress} = useLoaderData()
 
 
     const { pathname } = useLocation();
@@ -58,11 +58,6 @@ export default function StudentProgressPage() {
     
     return (
         <main>
-        {/* <div className="flex">
-            <Link to="all" className="block p-4 text-xl text-blue-500">All</Link>
-            <Link to="development" className="block p-4 text-xl text-blue-500">Development</Link>
-            <Link to="design" className="block p-4 text-xl text-blue-500">Design</Link>
-        </div> */}
 
             <div className = "department-nav-links">
               <Link to = "development" className = "dept-link" id = {path.includes('development') ? "active-program-link" : "false"}>DEVELOPMENT</Link>
