@@ -20,9 +20,11 @@ export const loader = async () => {
 export default function DevelopmentPage() {
   let {records, progress} = useLoaderData()
 
-  let filteredRecords = records.filter(fields => "FSJS" ? fields["Course Subject"] === "FSJS" : fields)
+  let filteredRecords = records.filter(fields => "FSJS" ? fields["Course Subject"] === "FSJS"  && fields["Simple Status"] === "In Progress" : fields)
   let pausedRecords = records.filter(fields => "FSJS" && "Paused" ? fields["Course Subject"] === "FSJS" && fields["Simple Status"] === "Paused" : fields)
 
+
+  console.log(filteredRecords)
     return (
         <main>
            <div className = "overview-cards-container">

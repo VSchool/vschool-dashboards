@@ -6,22 +6,27 @@ import {useContext} from 'react'
 
 
 
-// export const loader = async () => {
-//     let localStorage
-//     if (typeof localStorage === "undefined" || localStorage === null) {
-//       var LocalStorage = require('node-localstorage').LocalStorage;
-//       localStorage = new LocalStorage('./scratch');
-//     }
+export const loader = async () => {
+    let localStorage
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
 
-//     return {
-//       records: JSON.parse(localStorage.getItem('AllStudentRecords'))
-//     }
-//   };
+    return {
+      records: JSON.parse(localStorage.getItem('AllStudentRecords'))
+    }
+  };
 
 export default function EducationIndex() {
 
-  const { records, progress, page, title, dept, course, setTimeFrame, filteredRecords, paused } = useContext(Context);
+//   const { records, progress, page, title, dept, course, setTimeFrame, filteredRecords, paused } = useContext(Context);
     
+    let {records}  = useLoaderData()
+
+    let filteredRecords = records.filter(fields => "XD" && "FSJS" ? fields["Course Subject"] === "XD" || fields["Course Subject"] === "FSJS" && fields["Simple Status"] === "In Progress" : fields)
+    let pausedRecords = records.filter(fields => "Paused" ? fields["Simple Status"] === "Paused" : fields)
+
     return (
         <main>
           
@@ -60,7 +65,7 @@ export default function EducationIndex() {
 
                                 <div className = "small-card">
                                     <h3 className = "card-title education paused">PAUSED</h3>
-                                    <h3 className = "card-nums" > {paused.length} </h3>
+                                    <h3 className = "card-nums" > {pausedRecords.length} </h3>
                                     <p className = "card-compared-stat" style = {{color: "red"}}>-5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>From last month</span></p>                       
                                 </div>
 

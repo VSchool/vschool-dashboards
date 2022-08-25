@@ -8,7 +8,7 @@ import users from "public/users_noBorder.png"
 import stats from "public/stats.png"
 import {Link, Outlet, useLocation} from "@remix-run/react";
 
-console.log("navbar-component")
+
 export default function NavBar() {
 
     const { pathname } = useLocation();
@@ -25,7 +25,7 @@ export default function NavBar() {
          setActiveIcon({[name]: value})
     }
 
-    console.log(activeIcon)
+
 
 
 

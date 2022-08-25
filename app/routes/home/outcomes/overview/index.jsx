@@ -20,7 +20,7 @@ export const loader = async () => {
 
 export default function OutcomesIndex (){
   const { progress, page, title, dept, course, setTimeFrame, filteredRecords, filteredStage1, filteredStage2, filteredStage3 } = useContext(Context);
-   const { stage1Records, stage2Records, stage3Records } = useLoaderData()
+   let { stage1Records, stage2Records, stage3Records } = useLoaderData()
 
     // console.log(filteredStage1)
 const filteredStage1Records = stage1Records.filter(fields => fields["Admissions Status"] === "Started")

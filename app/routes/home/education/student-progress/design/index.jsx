@@ -3,23 +3,25 @@ import DisplayData from "../../../../components/displayData";
 import {Context} from "../../../data-context"
 import {useContext} from "react"
 
-// export const loader = async () => {
-//     let localStorage
-//     if (typeof localStorage === "undefined" || localStorage === null) {
-//       var LocalStorage = require('node-localstorage').LocalStorage;
-//       localStorage = new LocalStorage('./scratch');
-//     }
+export const loader = async () => {
+    let localStorage
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
 
-//     return {
-//       records: JSON.parse(localStorage.getItem('AllStudentRecords')),
-//       progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
-//     }
-// };
+    return {
+      records: JSON.parse(localStorage.getItem('AllStudentRecords')),
+      progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
+    }
+};
 
 export default function DesignPage() {
-    // const { records, progress } = useLoaderData();
-    const { records, progress, page, title, dept, course, setTimeFrame, filteredRecords, paused } = useContext(Context);
+
     
+    let {records, progress} = useLoaderData()
+    let filteredRecords = records.filter(fields => "XD" ? fields["Course Subject"] === "XD"  && fields["Simple Status"] === "In Progress" : fields)
+  let pausedRecords = records.filter(fields => "XD" && "Paused" ? fields["Course Subject"] === "XD" && fields["Simple Status"] === "Paused" : fields)
     return (
         <main>
 		       <div className = "overview-cards-container">
@@ -57,7 +59,7 @@ export default function DesignPage() {
 
                                 <div className = "small-card">
                                     <h3 className = "card-title education paused">PAUSED</h3>
-                                    <h3 className = "card-nums" > {paused.length} </h3>
+                                    <h3 className = "card-nums" > {pausedRecords.length} </h3>
                                     <p className = "card-compared-stat" style = {{color: "red"}}>-5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>From last month</span></p>                       
                                 </div>
 

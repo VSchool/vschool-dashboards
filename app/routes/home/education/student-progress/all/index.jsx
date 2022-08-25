@@ -20,11 +20,12 @@ export default function AllStudentProgressPage() {
 
 //   const { records, progress, page, title, dept, course, setTimeFrame, filteredRecords, paused } = useContext(Context);
     let {records, progress} = useLoaderData()
-    console.log(records)
-
-    let filteredRecords = records.filter(fields => "XD" || "FSJS" ? fields["Course Subject"] === "XD" || "FSJS" : fields)
-    let pausedRecords = records.filter(fields => "Paused" ? fields["Simple Status"] === "Paused" : fields)
+  
     
+    let filteredXDRecords =records.filter(fields => "XD" && "FSJS" ? fields["Course Subject"] === "XD" || fields["Course Subject"] === "FSJS" && fields["Simple Status"]=== "In Progress": fields)
+    let filteredRecords = records.filter(fields => "XD" && "FSJS" ? fields["Course Subject"] === "XD" || fields["Course Subject"] === "FSJS" && fields["Simple Status"] === "In Progress" : fields)
+    let pausedRecords = records.filter(fields => "Paused" ? fields["Simple Status"] === "Paused" : fields)
+    // console.log(records)
     return (
         <main>
 			<div className = "overview-cards-container">
