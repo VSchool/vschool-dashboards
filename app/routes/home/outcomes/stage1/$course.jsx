@@ -1,7 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
-import DisplayData from "../../../../components/displayData";
-import {Context} from '../../../data-context';
-import { useContext } from 'react';
+import { useLoaderData, useParams} from "@remix-run/react";
 
 export const loader = async () => {
     let localStorage
@@ -14,46 +11,28 @@ export const loader = async () => {
       records: JSON.parse(localStorage.getItem('AllStudentRecords')),
       progress: JSON.parse(localStorage.getItem('AllStudentProgress'))
     }
-  };
+};
 
-export default function AllStudentProgressPage() {
+export default function AllStage1Page() {
+    const { records, progress } = useLoaderData();
+    const { course } = useParams()
 
-//   const { records, progress, page, title, dept, course, setTimeFrame, filteredRecords, paused } = useContext(Context);
-    let {records, progress} = useLoaderData()
-    console.log(records)
+    if(course !== "development" && course !== "design" && course !== "all"){
+        return <a href="http://zschool.io/">you found the easter egg</a>
+    }
 
-    let filteredRecords = records.filter(fields => "XD" || "FSJS" ? fields["Course Subject"] === "XD" || "FSJS" : fields)
-    let pausedRecords = records.filter(fields => "Paused" ? fields["Simple Status"] === "Paused" : fields)
+    const recordCallback = {
+        development: fields => "FSJS" ? fields["Course Subject"] === "FSJS" : fields,
+        design: fields => "XD" ? fields["Course Subject"] === "XD" : fields,
+        all: fields => "XD" || "FSJS" ? fields["Course Subject"] === "XD" || "FSJS" : fields
+    }
     
+    const filteredRecords = records.filter(recordCallback[course])
+ 
     return (
-        <main>
-			<div className = "overview-cards-container">
-                        <div className = "overview-cards-wrapper">
-                            <div className = "overview-card-large">
-                                <h3 className = "card-title">Total Students</h3>
-                                <h3 className = "card-nums" style = {{fontSize: "80px", marginBottom: "15px"}}>{filteredRecords.length}</h3>
-                                 <p className = "card-compared-stat">+5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>Compared to last month</span></p>
-                            </div>
-                                     
-                            <div className = "overview-card-large">
-                                <h3 className = "card-title education completed">COMPLETED</h3>
-                                <h3 className = "card-nums" style = {{fontSize: "44px"}}>{filteredRecords.filter(fields => fields["Simple Status"] === "Completed - Level 8" || fields["Simple Status"] === "Jobbed Out").length}</h3>
-                                <p className = "card-compared-stat">+10%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>From last month</span></p>
-                            </div>
-
-                    
-{/* 
-                            <div className = "small-card">
-                                    <h3 className = "card-title">Median Completion</h3>
-                                    <h3 className = "card-nums" > {getMedian(medianComp, 'Course Completed in Days') ? getMedian(medianComp, 'Course Completed in Days') + ' days': 'Not Enough Data'}</h3>
-                                    <p className = "card-compared-stat">+0 from goal <span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>Last 100 completions</span></p>                       
-                                </div> */}
-
-                        </div>  
-
-                    
-
-                        <div className = "small-card-container">
+        <main>      
+             
+             <div className = "small-card-container">
                                 <div className = "small-card">
                                     <h3 className = "card-title education active">ACTIVE</h3>
                                     <h3 className = "card-nums" >{filteredRecords.filter(fields => fields["Simple Status"] === "In Progress").length}</h3>
@@ -62,7 +41,7 @@ export default function AllStudentProgressPage() {
 
                                 <div className = "small-card">
                                     <h3 className = "card-title education paused">PAUSED</h3>
-                                    <h3 className = "card-nums" >{pausedRecords.length} </h3>
+                                    <h3 className = "card-nums" >  </h3>
                                     <p className = "card-compared-stat" style = {{color: "red"}}>-5%<span style = {{color: "black", marginLeft: "4px", fontFamily: "aktiv-grotesk,sans-serif"}}>From last month</span></p>                       
                                 </div>
 
@@ -86,7 +65,7 @@ export default function AllStudentProgressPage() {
                                 </div>
 
                         </div>
-                        </div>
+                        
         </main>
     );
 }

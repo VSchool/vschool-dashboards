@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "@remix-run/react";
-import searchBar from "public/search.png"
+
 
 export default function Stage1Links() {
 
@@ -19,7 +19,7 @@ export default function Stage1Links() {
         <div className="flex-1 p-6">
           <Outlet />
         </div>
-        <div className = "progress-search-container">
+        {/* <div className = "progress-search-container">
             <p className = "channels-header" style = {{marginLeft: "75px"}}>Students</p>
                 <div className = "channels-searchbar" style = {{marginLeft: "75px"}}>
                     <img src = {searchBar} className = "search-icon" alt = "searchbarLogo" />
@@ -37,7 +37,7 @@ export default function Stage1Links() {
                     </select>
                         
                 </div>
-                </div>
+                </div> */}
       </main>
     );
 }
