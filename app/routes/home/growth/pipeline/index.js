@@ -2,7 +2,7 @@ import DisplayData from '../../../components/displayData';
 import { useContext, useEffect, useCallback } from 'react'
 import {Context} from '../../data-context'
 import Timeframe from '../../../components/timeframe';
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 export default function Pipeline (){
 const { setInitialGrowth, growthRecords, setTimeFrame } = useContext(Context);
 

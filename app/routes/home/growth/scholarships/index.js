@@ -1,15 +1,39 @@
 import DisplayData from "../../../components/displayData"
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 import {Context} from '../../data-context';
 import { useContext } from 'react';
 import Timeframe from "../../../components/timeframe";
 
+import { useLoaderData } from "@remix-run/react";
+import { getData } from "../../../../models/airtable.server";
+
+
+export const loader = async ({ request }) => {
+    let localStorage
+    if (typeof localStorage === "undefined" || localStorage === null) {
+      var LocalStorage = require('node-localstorage').LocalStorage;
+      localStorage = new LocalStorage('./scratch');
+    }
+    return {
+        stage1Records: JSON.parse(localStorage.getItem('stage1')),
+        stage2Records: JSON.parse(localStorage.getItem('stage2')),
+        stage3Records: JSON.parse(localStorage.getItem("stage3")),
+        allGrowthRecords:JSON.parse(localStorage.getItem('AllGrowthRecords'))
+      }
+    };
+
+	
+
+
 
 export default function GrowthScholarships(){
 
+    let {allGrowthRecords, stage1Records} = useLoaderData()
 
-    const { records, progress, page, title, dept, course, setTimeFrame } = useContext(Context);
+    const { setTimeFrame } = useContext(Context);
 
+    console.log(allGrowthRecords)
+    
 
     return (
         

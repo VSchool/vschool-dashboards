@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useLoaderData } from "@remix-run/react";
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 import { getData } from "../../../models/airtable.server"
 
 
