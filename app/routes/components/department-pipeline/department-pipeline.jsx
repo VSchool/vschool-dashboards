@@ -1,17 +1,16 @@
 import React from "react"
-import stats from "public/stats.png"
-// import randomUser from "public/randomUser.png"
+import stats from "public/images/stats.png"
+import randomUser from "public/images/randomUser.png"
 
 export default function DepartmentPipeline(){
     return (
-        <div className = "pipeline-container">
+        <div className = "department-container">
 
-            <div className = "pipeline-header">
+            <div className = "department-header">
                 <img src = {stats} className = "header-logo" alt  = "stats logo" />
                 <h3 className = "header-title">Growth Department</h3>  
-                {/* <img src = {randomUser}className = "userImg" /> */}
             </div>
-            
+                <div className = "userImg" ></div>
         </div>
     )
 }

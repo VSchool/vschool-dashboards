@@ -83,8 +83,8 @@ export default function HomePage() {
 
 	return (
 		<div className="flex h-full min-h-screen flex-col">
-		<header className="flex items-center justify-between bg-slate-800 p-4 text-white">
-			<h1 className="text-3xl font-bold" style = {{marginLeft: "150px"}}>
+		{/* <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
+			<h1 className="text-3xl font-bold" style = {{marginLeft: "125px"}}>
 			<Link to=".">V School</Link>
 			</h1>
 			<p>{user.email}</p>
@@ -102,7 +102,7 @@ export default function HomePage() {
 			>
 				Refresh Data
 			</button>}
-		</header>
+		</header> */}
 
 		<main className="flex h-full bg-white">
 			<NavBar />

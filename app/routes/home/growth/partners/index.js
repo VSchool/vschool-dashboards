@@ -1,7 +1,7 @@
 import DisplayData from '../../../components/displayData';
 import { useContext } from 'react';
 import {Context} from '../../data-context';
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 import Timeframe from '../../../components/timeframe';
 import { useLoaderData } from "@remix-run/react";
 import { getData } from "../../../../models/airtable.server";

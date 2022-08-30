@@ -1,5 +1,5 @@
 import DisplayData from "../../../components/displayData"
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 import {Context} from '../../data-context';
 import { useContext } from 'react';
 import Timeframe from "../../../components/timeframe";

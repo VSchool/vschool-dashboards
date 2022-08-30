@@ -1,5 +1,5 @@
 import React from "react"
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 
 export default function Channels(){
     return (
@@ -7,7 +7,7 @@ export default function Channels(){
            <div className = "channels-container">
                 <p className = "channels-header">Channels</p>
                 <div className = "channels-searchbar">
-                    <img src = {searchBar} className = "search-icon" />
+                    <img src = {searchBar} className = "search-icon" alt ="magnifying glass" />
                     <input type= 'text' placeholder="Find Channel" />
                 </div>
                 <div className = "channels-filters">

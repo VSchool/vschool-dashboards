@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Timeframe from '../components/timeframe';
 import Channels from './channels/channels';
-import searchBar from "public/search.png"
-import devLogo from "public/dev.png"
-import designLogo from "public/design.png"
-import securityLogo from 'public/security.png'
-import blockchainLogo from "public/blockchain.png"
+import searchBar from "public/images/search.png"
+import devLogo from "public/images/dev.png"
+import designLogo from "public/images/design.png"
+import securityLogo from 'public/images/security.png'
+import blockchainLogo from "public/images/blockchain.png"
 
 import { useContext } from 'react';
 import {Context} from '../home/data-context';

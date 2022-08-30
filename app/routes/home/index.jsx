@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import homeLogo from "public/home.png"
+import homeLogo from "public/images/home.png"
 
 export default function HomeIndex() {
   return (

@@ -128,6 +128,12 @@ function DataContextProvider(props) {
 		}))
 	}
 
+    const [isOpen, setIsOpen] = useState(false)
+
+    function toggleProfileDropDown(){
+        setIsOpen(!isOpen)
+    }
+
     
 
     return (
@@ -145,7 +151,8 @@ function DataContextProvider(props) {
             setTimeFrame, 
             setInitialGrowth, 
             setInitialOutcomes, 
-            setInitialEducation
+            setInitialEducation,
+            toggleProfileDropDown
         }}>
             {props.children}
         </Context.Provider>

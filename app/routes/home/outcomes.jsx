@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation, useParams } from "@remix-run/react";
-import award from "public/award.png"
+import award from "public/images/award.png"
 import Timeframe from "../components/timeframe";
-import searchBar from "public/search.png"
+import searchBar from "public/images/search.png"
 
 export default function OutcomesPage() {
 
@@ -15,9 +15,9 @@ export default function OutcomesPage() {
     return (
       <main>
         {/* THIS WILL BE A COMPONENT */}
-        <div className = "pipeline-container">
+        <div className = "department-container">
 
-          <div className = "pipeline-header">
+          <div className = "department-header">
               <img src = {award} className = "header-logo" alt  = "award logo" />
               <h3 className = "header-title">Outcomes Department</h3>  
               {/* <img src = {randomUser}className = "userImg" /> */}
